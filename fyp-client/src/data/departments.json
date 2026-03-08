@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Software Engineering",
+        "abbreviation": "SW"
+    },
+    {
+        "name": "Information Technology",
+        "abbreviation": "IT"
+    },
+    {
+        "name": "Computer Science",
+        "abbreviation": "CS"
+    }
+]

@@ -1,0 +1,1 @@
+export { default as spinner } from "./icons/loading.spinner.svg";

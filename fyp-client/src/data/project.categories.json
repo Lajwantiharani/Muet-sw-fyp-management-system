@@ -1,0 +1,342 @@
+[
+    {
+        "label": "AI/ML Project",
+        "value": "ai ml"
+    },
+    {
+        "label": "Agritech Solution",
+        "value": "agritech"
+    },
+    {
+        "label": "AR/VR Application",
+        "value": "ar vr"
+    },
+    {
+        "label": "Augmented Reality for Education",
+        "value": "ar education"
+    },
+    {
+        "label": "Automated Timetable Generator",
+        "value": "timetable generator"
+    },
+    {
+        "label": "Automation Tool / Script",
+        "value": "automation tool"
+    },
+    {
+        "label": "Banking System Simulation",
+        "value": "banking system"
+    },
+    {
+        "label": "Big Data Analytics",
+        "value": "big data"
+    },
+    {
+        "label": "Blockchain Project",
+        "value": "blockchain"
+    },
+    {
+        "label": "Career Counseling System",
+        "value": "career counseling"
+    },
+    {
+        "label": "Chatbot / NLP Application",
+        "value": "chatbot nlp"
+    },
+    {
+        "label": "Cloud-Based SaaS Platform",
+        "value": "saas"
+    },
+    {
+        "label": "College Admission Portal",
+        "value": "college admission"
+    },
+    {
+        "label": "Compiler / Interpreter",
+        "value": "compiler"
+    },
+    {
+        "label": "Content Management System (CMS)",
+        "value": "cms"
+    },
+    {
+        "label": "Crowdsourcing / Donation Platform",
+        "value": "crowdsourcing"
+    },
+    {
+        "label": "Crypto Price Tracker / Wallet",
+        "value": "crypto tracker"
+    },
+    {
+        "label": "Cybersecurity Tool",
+        "value": "cybersecurity"
+    },
+    {
+        "label": "Data Science / Analytics",
+        "value": "data science"
+    },
+    {
+        "label": "Dating or Matrimonial App",
+        "value": "dating app"
+    },
+    {
+        "label": "Delivery / Courier Management App",
+        "value": "delivery app"
+    },
+    {
+        "label": "Desktop Application",
+        "value": "desktop application"
+    },
+    {
+        "label": "DevOps / Cloud Project",
+        "value": "devops cloud"
+    },
+    {
+        "label": "Document Scanner / OCR App",
+        "value": "ocr scanner"
+    },
+    {
+        "label": "E-commerce Platform",
+        "value": "ecommerce"
+    },
+    {
+        "label": "E-learning / Quiz App",
+        "value": "e-learning"
+    },
+    {
+        "label": "Educational Tool / LMS",
+        "value": "education tool"
+    },
+    {
+        "label": "Employee Attendance / HRM System",
+        "value": "hrm system"
+    },
+    {
+        "label": "Environmental Monitoring",
+        "value": "green tech"
+    },
+    {
+        "label": "Event Management System",
+        "value": "event management"
+    },
+    {
+        "label": "Expense Tracker / Budget App",
+        "value": "expense tracker"
+    },
+    {
+        "label": "Facial Recognition System",
+        "value": "face recognition"
+    },
+    {
+        "label": "Fake News Detection System",
+        "value": "fake news"
+    },
+    {
+        "label": "Feedback Collection / Survey Tool",
+        "value": "feedback tool"
+    },
+    {
+        "label": "FinTech Application",
+        "value": "fintech"
+    },
+    {
+        "label": "Fitness / Workout App",
+        "value": "fitness app"
+    },
+    {
+        "label": "Food Delivery / Restaurant App",
+        "value": "food app"
+    },
+    {
+        "label": "Game AI / Game Bot",
+        "value": "game ai"
+    },
+    {
+        "label": "Game Development",
+        "value": "game dev"
+    },
+    {
+        "label": "Healthcare Tech / App",
+        "value": "healthcare app"
+    },
+    {
+        "label": "Home Automation System",
+        "value": "home automation"
+    },
+    {
+        "label": "Hospital Management System",
+        "value": "hospital management"
+    },
+    {
+        "label": "Hotel Booking System",
+        "value": "hotel booking"
+    },
+    {
+        "label": "HR / Recruitment Tool",
+        "value": "hr recruitment"
+    },
+    {
+        "label": "Inventory Management System",
+        "value": "inventory management"
+    },
+    {
+        "label": "IoT / Embedded Systems",
+        "value": "iot embedded"
+    },
+    {
+        "label": "Language Learning / Translator App",
+        "value": "language learning"
+    },
+    {
+        "label": "Law Firm Case Tracker",
+        "value": "legal tech"
+    },
+    {
+        "label": "Library Management System",
+        "value": "library system"
+    },
+    {
+        "label": "Logistics / Supply Chain App",
+        "value": "logistics"
+    },
+    {
+        "label": "Lost & Found Platform",
+        "value": "lost found"
+    },
+    {
+        "label": "Mental Health / Wellness App",
+        "value": "mental health"
+    },
+    {
+        "label": "Mobile App",
+        "value": "mobile app"
+    },
+    {
+        "label": "News Aggregator / Blog Reader",
+        "value": "news reader"
+    },
+    {
+        "label": "Online Bookstore App",
+        "value": "bookstore app"
+    },
+    {
+        "label": "Online Examination System",
+        "value": "exam system"
+    },
+    {
+        "label": "Online Job Portal",
+        "value": "job portal"
+    },
+    {
+        "label": "Parking Management System",
+        "value": "parking system"
+    },
+    {
+        "label": "Personal Portfolio / Resume Builder",
+        "value": "resume builder"
+    },
+    {
+        "label": "Project Management Tool",
+        "value": "project management"
+    },
+    {
+        "label": "Real Estate / Property Management App",
+        "value": "real estate"
+    },
+    {
+        "label": "Restaurant POS / Billing System",
+        "value": "restaurant pos"
+    },
+    {
+        "label": "Resume Parser / Analyzer Tool",
+        "value": "resume parser"
+    },
+    {
+        "label": "Ride Sharing / Carpooling App",
+        "value": "ride sharing"
+    },
+    {
+        "label": "Robotics Project",
+        "value": "robotics"
+    },
+    {
+        "label": "School Management System",
+        "value": "school system"
+    },
+    {
+        "label": "Simulation / Modeling",
+        "value": "simulation"
+    },
+    {
+        "label": "Smart Attendance with Face Detection",
+        "value": "smart attendance"
+    },
+    {
+        "label": "Smart City Monitoring System",
+        "value": "smart city"
+    },
+    {
+        "label": "Social Media / Networking App",
+        "value": "social media"
+    },
+    {
+        "label": "Sports Event Scoring System",
+        "value": "sports scoring"
+    },
+    {
+        "label": "Streaming / Media Platform",
+        "value": "media streaming"
+    },
+    {
+        "label": "Student Result Management System",
+        "value": "result system"
+    },
+    {
+        "label": "Task Tracker / To-do App",
+        "value": "todo app"
+    },
+    {
+        "label": "Tourism Guide App",
+        "value": "tourism guide"
+    },
+    {
+        "label": "Traffic Monitoring / Accident Detection",
+        "value": "traffic monitoring"
+    },
+    {
+        "label": "Travel / Tourism App",
+        "value": "travel app"
+    },
+    {
+        "label": "Vehicle Tracking System",
+        "value": "vehicle tracking"
+    },
+    {
+        "label": "Virtual Lab / Online Simulator",
+        "value": "virtual lab"
+    },
+    {
+        "label": "Voting / Polling System",
+        "value": "voting system"
+    },
+    {
+        "label": "Waste Management App",
+        "value": "waste management"
+    },
+    {
+        "label": "Water Level Monitoring System",
+        "value": "water level"
+    },
+    {
+        "label": "Weather Forecasting App",
+        "value": "weather app"
+    },
+    {
+        "label": "Website",
+        "value": "website"
+    },
+    {
+        "label": "Women Safety App",
+        "value": "women safety"
+    }
+]

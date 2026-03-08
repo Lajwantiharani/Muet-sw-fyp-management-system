@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>
+    <%= subject || 'Welcome To FYP Management System' %>
+  </title>
+</head>
+
+<body style="margin:0; padding:0; background: transparent; font-family:'Segoe UI', sans-serif; overflow-x:hidden; box-sizing:border-box;">
+  <div style="width:100%; padding:10px; box-sizing:border-box;">
+    <div style="width:100%; max-width:550px; margin:0 auto 0px; background: transparent; border-radius:8px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.06); box-sizing:border-box;">
+
+      <!-- Header -->
+      <%- include('./partials/header') %>
+
+      <!-- Main Content -->
+      <div style="background-color:#ffffff; padding:30px 20px; padding-bottom:5px; color:#333333; border:1px #e0e0e0 solid; border-radius:5px; border-top-color:#2563EB;">
+        <p style="font-size:16px; margin:0px; margin-bottom:25px;">Hi <strong><%= name %></strong>,</p>
+
+        <p style="font-size:14px; margin-bottom:20px;">
+            Your account has been successfully created. Below are your login credentials for the FYP Management System:
+        </p>
+
+        <div style="margin-bottom:20px; line-height:1.6;">
+            <strong>Email:</strong> <%= email %><br />
+            <strong>Password:</strong> <%= password %>
+        </div>
+
+        <div style="text-align:left; margin: 0px 0px 30px 0;">
+            <a href="<%= loginLink %>"
+            style="background-color:#2563EB; color:#ffffff; text-decoration:none; padding:12px 25px; border-radius:6px; font-weight:600; display:inline-block;">
+            Login Now
+            </a>
+        </div>
+
+        <p style="font-size:14px;">Thanks,<br><strong>FYP Management System</strong></p>
+     </div>
+
+
+      <!-- Footer -->
+      <%- include('./partials/footer', {
+        footerText: "This account has been created by department administrator. Please use the credentials above to log in. You may change your password after your first login.",
+        supportPhone: supportPhone, 
+        supportEmail: supportEmail, 
+        clientBaseUrl: clientBaseUrl 
+      }) %>
+    </div>
+  </div>
+</body>
+
+</html>
