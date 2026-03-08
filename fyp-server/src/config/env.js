@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = Object.freeze({
-    port: process.env.APP_PORT,
-    origin: process.env.APP_ORIGIN + `:${process.env.APP_PORT}`,
+    port: process.env.PORT || process.env.APP_PORT,
+    origin: process.env.APP_ORIGIN || "",
     secretKey: process.env.APP_SECRET_KEY,
     mode: process.env.APP_MODE,
 });
@@ -16,6 +16,7 @@ const support = Object.freeze({
     phone: process.env.SUPPORT_PHONE,
 });
 const db = Object.freeze({
+    uri: process.env.DB_URI,
     url: process.env.DB_URL,
     port: process.env.DB_PORT,
     name: process.env.DB_NAME,
