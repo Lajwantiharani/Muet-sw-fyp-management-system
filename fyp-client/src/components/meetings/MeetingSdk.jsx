@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { ZoomMtg } from "@zoom/meetingsdk";
 
 export default function MeetingSdk({
   meetingNumber,
@@ -11,26 +10,38 @@ export default function MeetingSdk({
   leaveUrl,
 }) {
   useEffect(() => {
-    ZoomMtg.preLoadWasm();
-    ZoomMtg.prepareWebSDK();
+    let zoomMtg;
+    let mounted = true;
 
-    ZoomMtg.init({
-      leaveUrl,
-      patchJsMedia: true,
-      success: () => {
-        ZoomMtg.join({
-          signature,
-          meetingNumber,
-          passWord: password || "",
-          userName,
-          userEmail,
-          ...(zakToken ? { zak: zakToken } : {}),
-        });
-      },
-    });
+    const startMeeting = async () => {
+      const { ZoomMtg } = await import("@zoom/meetingsdk");
+      if (!mounted) return;
+      zoomMtg = ZoomMtg;
+
+      zoomMtg.preLoadWasm();
+      zoomMtg.prepareWebSDK();
+
+      zoomMtg.init({
+        leaveUrl,
+        patchJsMedia: true,
+        success: () => {
+          zoomMtg.join({
+            signature,
+            meetingNumber,
+            passWord: password || "",
+            userName,
+            userEmail,
+            ...(zakToken ? { zak: zakToken } : {}),
+          });
+        },
+      });
+    };
+
+    startMeeting();
 
     return () => {
-      ZoomMtg.destroy();
+      mounted = false;
+      zoomMtg?.destroy();
     }
   }, [meetingNumber, signature, zakToken, password, userName, userEmail, leaveUrl]);
 
