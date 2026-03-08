@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/muqadasqk/fyp-server.git"
+    "url": "git+https://github.com/lajwantiharani/muet-sw-fyp-management-system.git"
   },
   "author": "lajwanti",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/muqadasqk/fyp-server/issues"
+    "url": "https://github.com/lajwantiharani/muet-sw-fyp-management-system/issues"
   },
-  "homepage": "https://github.com/muqadasqk/fyp-server#readme",
+  "homepage": "https://github.com/lajwantiharani/muet-sw-fyp-management-system#readme",
   "dependencies": {
     "axios": "^1.10.0",
     "bcryptjs": "^2.4.3",

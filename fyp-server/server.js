@@ -41,10 +41,10 @@ app.use(
 // root route
 app.get("/", (_, res) => {
     const developer = {
-        name: "muqadas qaim khani",
-        email: "muqadasqaimkhani@gmail.com",
+        name: "lajwanti harani",
+        email: "lajwantiharani7@gmail.com",
         role: "MERN Stack Developer",
-        linkedIn: "https://linkedin.com/in/muqadas-qaim-khani-34382b247"
+        linkedIn: "https://linkedin.com/in/lajwantiharani"
     };
     return res.response(200, "Backend is up and fine!", { developer });
 });
