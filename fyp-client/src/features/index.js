@@ -32,4 +32,4 @@ export { retrieveMeetings, createMeeting, updateMeeting, projectSpecificMeetings
 
 //past fyps
 export { default as pastFypReducer } from "./pastFypSlice";
-export { retrievePastFyps, uploadPastFypPdf, backfillPastFyps } from "./pastFypSlice";
+export { retrievePastFyps, uploadPastFypPdf, backfillPastFyps, retrieveImportedProjects } from "./pastFypSlice";

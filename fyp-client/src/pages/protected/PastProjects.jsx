@@ -1,9 +1,10 @@
 import { Button, DashboardContent, DataTable, ViewProposalDetails } from '@components'
-import { retrievePastFyps, retrieveProposals } from '@features'
+import { retrievePastFyps, retrieveProposals, retrieveImportedProjects } from '@features'
 import { formatFilePath } from '@utils';
 import { useEffect, useMemo, useState } from 'react';
-import { FaDownload, FaEye } from 'react-icons/fa';
+import { FaDownload, FaEye, FaFileExcel } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux'
+import Overlay from '@components/app/Overlay';
 
 const ALLOWED_PDFS = new Set([
     "applications/16SW.pdf",
@@ -22,8 +23,9 @@ const getBatchLabel = (pdfPath = "") => {
 const PastProjects = ({ status = "past" }) => {
     const dispatch = useDispatch();
     const { proposals, pagination } = useSelector((state) => state.proposals);
-    const { pastFyps, loading: pastLoading } = useSelector((state) => state.pastFyp);
+    const { pastFyps, loading: pastLoading, excelProjects, excelPagination, excelLoading } = useSelector((state) => state.pastFyp);
     const [viewDetails, setViewDetails] = useState(null);
+    const [viewImport, setViewImport] = useState(null);
     const retrieve = useMemo(() => ({ status }), [status]);
 
     const visiblePastFyps = useMemo(() => {
@@ -57,17 +59,29 @@ const PastProjects = ({ status = "past" }) => {
         }));
     }, [dispatch, status]);
 
+    useEffect(() => {
+        if (status !== "past") return;
+
+        dispatch(retrieveImportedProjects({
+            page: {
+                current: 1,
+                size: 10,
+                sort: { createdAt: -1 }
+            }
+        }));
+    }, [dispatch, status]);
+
     if (status === "past") {
         return (
             <DashboardContent title="Past FYPs" description="View and search past final year projects">
-                <div className="mb-6 rounded-xl border border-primary bg-primary p-6 shadow-sm">
+                <div className="mb-6 rounded-2xl border border-primary bg-primary/80 p-6 shadow-sm">
                     <h4 className="mb-2 text-2xl font-black text-theme">Past FYPs</h4>
                     <p className="mb-0 text-sm text-secondary">
                         Browse previous Final Year Projects and open or download each PDF.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 rounded-2xl border border-primary bg-primary p-4 shadow-sm">
                     {visiblePastFyps.map((record) => (
                         <div
                             key={record._id}
@@ -98,10 +112,102 @@ const PastProjects = ({ status = "past" }) => {
                     ))}
                 </div>
 
+                <div className="mt-10 space-y-4">
+                    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between rounded-2xl border border-primary bg-primary p-4 shadow-sm">
+                        <div>
+                            <h4 className="mb-1 text-xl font-black text-theme">Past Projects </h4>
+                            <p className="text-secondary text-sm mb-0">Search fyps for all batches.</p>
+                        </div>
+                        <span className="inline-flex items-center gap-2 rounded-full bg-theme/10 px-4 py-2 text-theme text-sm font-semibold shadow-sm">
+                       
+                        </span>
+                    </div>
+
+                    <div className="rounded-2xl border border-primary bg-primary p-4 shadow-sm">
+                        <DataTable
+                            onChange={retrieveImportedProjects}
+                            retrieve={{}}
+                            recordList={excelProjects ?? []}
+                            paginationData={excelPagination ?? {}}
+                            wrap={false}
+                            actions={[
+                                { label: "View", icon: <FaEye />, onClick: (rec) => setViewImport(rec) },
+                            ]}
+                            onRowClick={(rec) => setViewImport(rec)}
+                            recordFields={{
+                                batch: "Batch",
+                                title: "Title",
+                                supervisorName: "Supervisor",
+                                membersLabel: "Members",
+                                abstract: "Abstract",
+                            }}
+                            searchableFields={{
+                                title: "Title",
+                                batch: "Batch",
+                                supervisorName: "Supervisor",
+                                membersLabel: "Members",
+                                abstract: "Abstract",
+                            }}
+                            isLoading={excelLoading}
+                            empty="No imported projects available yet"
+                            // contentOnly
+                        />
+                    </div>
+                </div>
+
                 {!pastLoading && visiblePastFyps.length === 0 && (
                     <div className="rounded-xl border border-primary bg-primary p-8 text-center text-secondary italic">
                         No past FYPs available right now.
                     </div>
+                )}
+
+                {viewImport && (
+                    <Overlay title="Imported Project Details" onClose={() => setViewImport(null)} width="max-w-4xl">
+                        <div className="space-y-5">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="p-4 rounded-lg border border-primary bg-primary-hover">
+                                    <p className="text-xs uppercase text-secondary mb-1">Batch</p>
+                                    <p className="font-semibold mb-0">{viewImport.batch || "-"}</p>
+                                </div>
+                                <div className="p-4 rounded-lg border border-primary bg-primary-hover">
+                                    <p className="text-xs uppercase text-secondary mb-1">Supervisor</p>
+                                    <p className="font-semibold mb-0">{viewImport.supervisor?.name || viewImport.supervisorName || "-"}</p>
+                                    {viewImport.supervisor?.department && (
+                                        <p className="text-sm text-secondary mb-0">{viewImport.supervisor.department}</p>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="p-4 rounded-lg border border-primary bg-primary-hover">
+                                <p className="text-xs uppercase text-secondary mb-1">Title</p>
+                                <p className="font-semibold text-lg mb-0">{viewImport.title || "-"}</p>
+                            </div>
+
+                            <div className="p-4 rounded-lg border border-primary bg-primary-hover">
+                                <p className="text-xs uppercase text-secondary mb-2">Members</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {(viewImport.group?.members ?? [])
+                                        .map((m) => m.name)
+                                        .filter(Boolean)
+                                        .map((name) => (
+                                            <span key={name} className="px-3 py-1 rounded-full bg-theme/10 text-theme text-sm font-semibold">
+                                                {name}
+                                            </span>
+                                        ))}
+                                    {(!viewImport.group?.members || viewImport.group.members.length === 0) && (
+                                        <span className="text-secondary text-sm">No members listed.</span>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="p-4 rounded-lg border border-primary bg-primary-hover">
+                                <p className="text-xs uppercase text-secondary mb-2">Abstract</p>
+                                <p className="mb-0 leading-6 whitespace-pre-wrap text-primary">
+                                    {viewImport.abstract || "No abstract provided."}
+                                </p>
+                            </div>
+                        </div>
+                    </Overlay>
                 )}
             </DashboardContent>
         );

@@ -3,7 +3,21 @@ import clsx from 'clsx';
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux';
 
-export const DataTable = ({ onChange, retrieve, recordList, paginationData, searchableFields, recordFields, empty, contentOnly = false, actions, hrefs = [] }) => {
+export const DataTable = ({
+    onChange,
+    retrieve,
+    recordList,
+    paginationData,
+    searchableFields,
+    recordFields,
+    empty,
+    contentOnly = false,
+    actions,
+    hrefs = [],
+    isLoading = false,
+    wrap = false,
+    onRowClick = null,
+}) => {
     const dispatch = useDispatch();
     const [page, setPage] = useState({ current: 1, size: 10, query: {}, sort: { createdAt: -1 } });
     const retrieveKey = useMemo(() => JSON.stringify(retrieve ?? {}), [retrieve]);
@@ -17,7 +31,7 @@ export const DataTable = ({ onChange, retrieve, recordList, paginationData, sear
     }, [page, retrieveKey, dispatch, onChange]);
 
 
-    return <div className={clsx("bg-primary overflow-x-hidden shadow-sm", { "p-5 border rounded-lg border-primary": !contentOnly })}>
+    return <div className={clsx("bg-primary overflow-x-auto shadow-sm", { "p-5 border rounded-lg border-primary": !contentOnly })}>
         {!contentOnly && (
             <SearchBar
                 fields={searchableFields}
@@ -32,6 +46,9 @@ export const DataTable = ({ onChange, retrieve, recordList, paginationData, sear
             fields={recordFields}
             actions={actions}
             empty={empty}
+            isLoading={isLoading}
+            wrap={wrap}
+            onRowClick={onRowClick}
             onSort={(sort) => setPage((p) => ({ ...p, sort }))}
         />
 

@@ -7,6 +7,9 @@ const initialState = {
     pagination: {},
     loading: false,
     uploading: false,
+    excelProjects: [],
+    excelPagination: {},
+    excelLoading: false,
 };
 
 export const retrievePastFyps = createAsyncThunk("pastFyp/retrievePastFyps",
@@ -38,6 +41,17 @@ export const backfillPastFyps = createAsyncThunk("pastFyp/backfillPastFyps",
     async ({ overwrite = false } = {}, { rejectWithValue }) => {
         try {
             const { data } = await apiRequest.post("/past-fyps/backfill", { overwrite });
+            return data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data);
+        }
+    }
+);
+
+export const retrieveImportedProjects = createAsyncThunk("pastFyp/retrieveImportedProjects",
+    async ({ page }, { rejectWithValue }) => {
+        try {
+            const { data } = await apiRequest.post("/import-projects/retrieve", { page }, { showSuccessToast: false });
             return data;
         } catch (error) {
             return rejectWithValue(error.response?.data);
@@ -85,6 +99,23 @@ const pastFypSlice = createSlice({
             })
             .addCase(backfillPastFyps.rejected, (state) => {
                 state.uploading = false;
+            })
+
+            .addCase(retrieveImportedProjects.pending, (state) => {
+                state.excelLoading = true;
+            })
+            .addCase(retrieveImportedProjects.fulfilled, (state, action) => {
+                state.excelLoading = false;
+                const records = action.payload.importProjects ?? [];
+                state.excelProjects = records.map((record) => ({
+                    ...record,
+                    supervisorName: record.supervisor?.name ?? "-",
+                    membersLabel: (record.group?.members ?? []).map((m) => m.name).join(", "),
+                }));
+                state.excelPagination = action.payload.pagination ?? {};
+            })
+            .addCase(retrieveImportedProjects.rejected, (state) => {
+                state.excelLoading = false;
             });
     }
 });

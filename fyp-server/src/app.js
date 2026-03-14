@@ -8,6 +8,7 @@ import projectRoutes from './routes/project.routes.js';
 import presentationRoutes from './routes/presentation.routes.js';
 import meetingRoutes from './routes/meeting.routes.js';
 import pastFypRoutes from './routes/past.fyp.routes.js';
+import importProjectsRoutes from './routes/import.projects.routes.js';
 
 // registered routes
 const apiRoutes = Router({ mergeParams: true });
@@ -22,6 +23,7 @@ apiRoutes.use('/presentations', presentationRoutes);
 apiRoutes.use('/meetings', meetingRoutes);
 apiRoutes.use('/past-fyps', pastFypRoutes);
 apiRoutes.use('/fyp-projects', pastFypRoutes);
+apiRoutes.use('/', importProjectsRoutes);
 
 // export to register
 export default apiRoutes;

@@ -43,7 +43,7 @@ const TableHeader = ({ fields, sortState, onSortToggle, hasActions }) => {
     );
 };
 
-const Table = ({ fields, records, actions, onSort, empty, isLoading, hrefs, ...prop }) => {
+const Table = ({ fields, records, actions, onSort, empty, isLoading, hrefs, wrap = false, onRowClick = null, ...prop }) => {
     const [sortState, setSortState] = useState({});
 
     const handleSortToggle = (field) => {
@@ -66,19 +66,24 @@ const Table = ({ fields, records, actions, onSort, empty, isLoading, hrefs, ...p
                 <tbody className="dark:divide-[rgba(255,255,255,0.05)]">
                     {(records.length > 0 && !isLoading) ? (
                         records.map((record, rowIndex) => (
-                            <tr
-                                key={record._id}
-                                className={clsx(
-                                    "transition-all duration-200 group hover:!bg-[#2564eb1a]",
-                                    rowIndex % 2 === 0 ? "bg-primary" : "bg-primary-hover border rounded"
-                                )}
-                            >
+                        <tr
+                            key={record._id}
+                            className={clsx(
+                                "transition-all duration-200 group hover:!bg-[#2564eb1a]",
+                                rowIndex % 2 === 0 ? "bg-primary" : "bg-primary-hover border rounded",
+                                onRowClick && "cursor-pointer"
+                            )}
+                            onClick={() => onRowClick && onRowClick(record)}
+                        >
                                 {Object.keys(fields).map((field) => (
                                     <td
                                         key={field}
                                         className={clsx(
                                             "px-4 py-0 text-sm text-primary ",
-                                            "bg-inherit truncate overflow-hidden whitespace-nowrap max-w-[170px]"
+                                            "bg-inherit",
+                                            wrap
+                                                ? "whitespace-pre-wrap break-words"
+                                                : "truncate overflow-hidden whitespace-nowrap max-w-[170px]"
                                         )}
                                         title={(!hrefs.includes(field) && (readObjectValueByPath(record, field)) || "-")}
                                     >
@@ -99,14 +104,19 @@ const Table = ({ fields, records, actions, onSort, empty, isLoading, hrefs, ...p
                                 {actions && (
                                     <td className="px-4 py-1.5 whitespace-nowrap flex items-center gap-2 bg-inherit">
                                         {actions.map(({ label, icon, ShowWhen, onClick }) => {
-                                            const key = Object.keys(ShowWhen)[0];
-                                            if (record[key] == ShowWhen[key] || ShowWhen[key] === true) {
-                                                return (
-                                                    <Button key={label} onClick={() => onClick(record._id, label)} className="text-xs button-secondary hover:bg-theme" >
-                                                        {icon} {label}
-                                                    </Button>
-                                                );
-                                            }
+                                            const shouldShow = !ShowWhen
+                                                ? true
+                                                : (() => {
+                                                    const key = Object.keys(ShowWhen)[0];
+                                                    return ShowWhen[key] === true || record[key] == ShowWhen[key];
+                                                })();
+
+                                            if (!shouldShow) return null;
+                                            return (
+                                                <Button key={label} onClick={(e) => { e.stopPropagation(); onClick(record); }} className="text-xs button-secondary hover:bg-theme" >
+                                                    {icon} {label}
+                                                </Button>
+                                            );
                                         })}
                                     </td>
                                 )}
