@@ -35,7 +35,7 @@
     "@hookform/resolvers": "^4.1.3",
     "@reduxjs/toolkit": "^2.6.1",
     "@zoom/meetingsdk": "^4.0.0",
-    "axios": "^1.8.4",
+    "axios": "^1.15.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lodash": "^4.17.21",
